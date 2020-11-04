@@ -8,6 +8,12 @@
 		<version>2.3.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	<repositories>
+		<repository>
+			<id>mtn-snapshots</id>
+			<url>https://nexus.infra.prod.westeurope.api.mtn.com/repository/mtn-group</url>
+		</repository>
+	</repositories>
 
 	<groupId>com.rareatom.rabbitmq</groupId>
 	<artifactId>rabbitmq-producer-consumer</artifactId>
@@ -24,7 +30,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -56,5 +61,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
