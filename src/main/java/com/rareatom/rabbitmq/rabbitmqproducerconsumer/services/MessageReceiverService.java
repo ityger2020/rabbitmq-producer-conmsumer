@@ -1,7 +1,6 @@
 package com.rareatom.rabbitmq.rabbitmqproducerconsumer.services;
 
 import com.mtn.madapi.commons.rabbitmq.queuing.consumer.BaseMessageReceiver;
-import com.rareatom.rabbitmq.rabbitmqproducerconsumer.models.UssdMessageRequests;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 

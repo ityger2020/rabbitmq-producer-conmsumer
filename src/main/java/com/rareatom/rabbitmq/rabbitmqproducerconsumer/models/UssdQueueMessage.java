@@ -7,7 +7,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @ToString
-public class UssdMessageRequests {
+public class UssdQueueMessage {
     private String sessionId;
     private int messageType;
     private String msisdn ;
