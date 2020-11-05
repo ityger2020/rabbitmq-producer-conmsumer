@@ -3,7 +3,7 @@ package com.rareatom.rabbitmq.rabbitmqproducerconsumer.services;
 import com.mtn.madapi.commons.rabbitmq.queuing.configuration.Queue;
 import com.mtn.madapi.commons.rabbitmq.queuing.configuration.RabbitMqProperties;
 import com.mtn.madapi.commons.rabbitmq.queuing.producer.SendMessageService;
-import com.rareatom.rabbitmq.rabbitmqproducerconsumer.models.UssdQueueMessage;
+import com.rareatom.rabbitmq.rabbitmqproducerconsumer.models.OutboundUSSDRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ public class SendMessageIntegrationService {
     SendMessageService messageService;
 
 
-    public void sendMessage(UssdQueueMessage messageRequests){
+    public void sendMessage(OutboundUSSDRequest messageRequests){
         Queue queue = mqProperties.getSendQueues().get(0);
         log.info("Sending message to queue {} with request {}", queue.getName() ,messageRequests);
         messageService.sendMessage(messageRequests , new HashMap<>(), queue);
