@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 @Slf4j
@@ -16,13 +15,10 @@ public class MessageReceiverService implements BaseMessageReceiver {
     @Autowired
     SendMessageIntegrationService integrationService;
 
-   private  AtomicInteger processCount = new AtomicInteger(0);
-
     @Override
     public <OutboundUSSDResponse> Mono<Void> processMessage(OutboundUSSDResponse response, Map<String, Object> map) {
         log.info("UssdMessageRequests from system layer{}" , response);
-        int incrementAndGet = processCount.incrementAndGet();
-
+        integrationService.processMessages((com.rareatom.rabbitmq.rabbitmqproducerconsumer.response.OutboundUSSDResponse) response);
         return null;
     }
 }

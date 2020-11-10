@@ -4,6 +4,7 @@ import com.mtn.madapi.commons.rabbitmq.queuing.configuration.Queue;
 import com.mtn.madapi.commons.rabbitmq.queuing.configuration.RabbitMqProperties;
 import com.mtn.madapi.commons.rabbitmq.queuing.producer.SendMessageService;
 import com.rareatom.rabbitmq.rabbitmqproducerconsumer.models.OutboundUSSDRequest;
+import com.rareatom.rabbitmq.rabbitmqproducerconsumer.models.SystemCache;
 import com.rareatom.rabbitmq.rabbitmqproducerconsumer.response.OutboundUSSDResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class SendMessageIntegrationService {
 
     @Autowired
     SendMessageService messageService;
+
+    @Autowired
+    SystemCache systemCache;
 
     private final String msisdn = "2348163641560";
 
