@@ -69,6 +69,7 @@ public class SendMessageIntegrationService {
         ussdMessageRequests.setUssdString(MENU_1);
         ussdMessageRequests.setMessageType(1);
         sendMessage(ussdMessageRequests);
+
     }
 
 
