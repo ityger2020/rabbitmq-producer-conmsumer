@@ -19,11 +19,12 @@ public class SendMessageIntegrationService {
     @Autowired
     SendMessageService messageService;
 
-
     public void sendMessage(OutboundUSSDRequest messageRequests){
         Queue queue = mqProperties.getSendQueues().get(0);
         log.info("Sending message to queue {} with request {}", queue.getName() ,messageRequests);
-        messageService.sendMessage(messageRequests , new HashMap<>(), queue);
+        HashMap<String , String > map = new HashMap<>();
+        map.put("transactionId" , String.valueOf(System.currentTimeMillis()));
+        messageService.sendMessage(messageRequests , map, queue);
     }
 
 
