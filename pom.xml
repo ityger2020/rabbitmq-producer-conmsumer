@@ -38,7 +38,7 @@
 		<dependency>
 			<groupId>com.mtn.madapi</groupId>
 			<artifactId>commons-rabbitmq-queuing</artifactId>
-			<version>1.0-RELEASE</version>
+			<version>1.6-RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.plugin</groupId>
