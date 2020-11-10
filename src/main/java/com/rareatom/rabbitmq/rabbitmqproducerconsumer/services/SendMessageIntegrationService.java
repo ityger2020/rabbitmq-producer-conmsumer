@@ -19,12 +19,32 @@ public class SendMessageIntegrationService {
     @Autowired
     SendMessageService messageService;
 
-    public void sendMessage(OutboundUSSDRequest messageRequests){
+    private final String INITIAL_MENU = "MTN ussd api \n" +
+            "Please pick an option \n" +
+            "1 For Menu 1 \n" +
+            "2 for Menu 2\n" +
+            "3 for exit";
+
+    private void sendMessage(OutboundUSSDRequest messageRequests){
         Queue queue = mqProperties.getSendQueues().get(0);
         log.info("Sending message to queue {} with request {}", queue.getName() ,messageRequests);
         HashMap<String , String > map = new HashMap<>();
         map.put("transactionId" , String.valueOf(System.currentTimeMillis()));
         messageService.sendMessage(messageRequests , map, queue);
+    }
+
+
+    public void sendInitialMenu(){
+        Queue queue = mqProperties.getSendQueues().get(0);
+        var ussdMessageRequests = new OutboundUSSDRequest();
+        ussdMessageRequests.setCallbackUrl("http://localhost:8080/go");
+        ussdMessageRequests.setMsisdn("2348163641560");
+        ussdMessageRequests.setSessionId("333o30303hrriro20900");
+        ussdMessageRequests.setServiceCode("*298*778#");
+        ussdMessageRequests.setUssdString(INITIAL_MENU);
+        ussdMessageRequests.setMessageType(0);
+        sendMessage(ussdMessageRequests);
+
     }
 
 
