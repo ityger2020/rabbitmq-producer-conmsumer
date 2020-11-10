@@ -7,8 +7,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  *
- * Map holds the current menu state which can be level 1 menu or level 2 menu
- * and then another String which is the current selection.
+ * Map holds the msisdn as a key
+ * and then the @{@link SystemState} that handles the
+ * currentMenuLevel (Menu level can be 1 for the initial menu with  multiple options )
+ * currentMenuSelection can mean for the current menu level what was the selection
+ * made by the subscriber.
  *
  */
 @Component
