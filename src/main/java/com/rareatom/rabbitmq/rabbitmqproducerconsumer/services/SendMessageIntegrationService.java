@@ -25,6 +25,7 @@ public class SendMessageIntegrationService {
     SystemCache systemCache;
 
     private final String msisdn = "2348163641560";
+    
 
     private final String INITIAL_MENU = "MTN ussd api \n" +
             "Please pick an option \n" +
