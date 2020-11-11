@@ -9,17 +9,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class SendMessageIntegrationService {
-
-
-
-
     @Autowired
     SystemCache systemCache;
 
     private final String msisdn = "2348163641560";
 
-    private final String MENU_1 = "You picked Menu 1 \n" +
-            "Please use 1 to exit.";
+    private final String MENU_1 = "";
 
     private final String MENU_2 = "You picked Menu 2 \n" +
             "Please use 2 to exit.";

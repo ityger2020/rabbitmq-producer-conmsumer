@@ -15,7 +15,7 @@ public class ScheduledTasks {
 
     @Scheduled(fixedRate = 900000)
     public void scheduledSendMessage(){
-        integrationService.sendInitialMenu();
+       // integrationService.sendInitialMenu();
     }
 
 }
