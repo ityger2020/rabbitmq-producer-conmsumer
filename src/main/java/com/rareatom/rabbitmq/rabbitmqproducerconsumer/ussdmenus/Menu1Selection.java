@@ -47,7 +47,7 @@ public class Menu1Selection implements Node {
           ussdMessageRequests.setMsisdn(fromMsisdn);
           ussdMessageRequests.setSessionId("333o30303hrriro20900");
           ussdMessageRequests.setServiceCode("*298*778#");
-          ussdMessageRequests.setUssdString(ussdString);
+          ussdMessageRequests.setUssdString("Thanks for choosing with MTN.");
           ussdMessageRequests.setMessageType(2);
           Queue queue = mqProperties.getSendQueues().get(0);
           log.info("Sending message to queue {} with request {}", queue.getName() , ussdMessageRequests);
