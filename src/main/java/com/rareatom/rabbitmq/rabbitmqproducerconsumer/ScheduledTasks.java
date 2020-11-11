@@ -1,6 +1,6 @@
 package com.rareatom.rabbitmq.rabbitmqproducerconsumer;
 
-import com.rareatom.rabbitmq.rabbitmqproducerconsumer.services.SendMessageIntegrationService;
+import com.rareatom.rabbitmq.rabbitmqproducerconsumer.ussdmenus.MenuSelection;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -11,11 +11,13 @@ import org.springframework.stereotype.Component;
 public class ScheduledTasks {
 
     @Autowired
-    SendMessageIntegrationService integrationService;
+    MenuSelection menuSelection;
+
+    private final String msisdn = "2348163641560";
 
     @Scheduled(fixedRate = 900000)
     public void scheduledSendMessage(){
-       // integrationService.sendInitialMenu();
+       menuSelection.render(msisdn);
     }
 
 }
