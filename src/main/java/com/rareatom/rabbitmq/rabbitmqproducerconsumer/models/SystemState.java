@@ -6,5 +6,4 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SystemState {
     private int currentMenuLevel;
-    private String currentSelection;
 }

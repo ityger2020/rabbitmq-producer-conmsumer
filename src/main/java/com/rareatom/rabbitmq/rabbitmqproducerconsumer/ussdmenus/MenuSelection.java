@@ -4,14 +4,14 @@ import com.mtn.madapi.commons.rabbitmq.queuing.configuration.Queue;
 import com.mtn.madapi.commons.rabbitmq.queuing.configuration.RabbitMqProperties;
 import com.mtn.madapi.commons.rabbitmq.queuing.producer.SendMessageService;
 import com.rareatom.rabbitmq.rabbitmqproducerconsumer.models.OutboundUSSDRequest;
+import com.rareatom.rabbitmq.rabbitmqproducerconsumer.models.SystemCache;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
 @Data
 @Slf4j
 @Component
@@ -27,7 +27,10 @@ public class MenuSelection implements Node {
 
     @Autowired
     Menu2Selection menu2Selection;
-    private List<Node> children = new ArrayList<>();
+
+    @Autowired
+    SystemCache systemCache;
+    private HashMap<Integer , Node> children = new HashMap<>();
 
     private  String ussdString = "MTN ussd api \n" +
            "Please pick an option \n" +
@@ -37,9 +40,8 @@ public class MenuSelection implements Node {
 
 
     public MenuSelection() {
-        add(menu1Selection);
-        add(menu2Selection);
-
+        add(1 , menu1Selection);
+        add(2 , menu2Selection);
     }
 
     @Override
@@ -67,8 +69,8 @@ public class MenuSelection implements Node {
 
     }
 
-    private void add(Node node){
-        children.add(node);
+    private void add(Integer index , Node node){
+        children.put(index, node);
     }
 
 }
