@@ -16,7 +16,6 @@ import java.util.List;
 @Slf4j
 @Component
 public class MenuSelection implements Node {
-
     @Autowired
     SendMessageService messageService;
 
@@ -25,7 +24,10 @@ public class MenuSelection implements Node {
 
     @Autowired
     Menu1Selection menu1Selection ;
-    private  List<Node> children = new ArrayList<>();
+
+    @Autowired
+    Menu2Selection menu2Selection;
+    private List<Node> children = new ArrayList<>();
 
     private  String ussdString = "MTN ussd api \n" +
            "Please pick an option \n" +
@@ -36,6 +38,7 @@ public class MenuSelection implements Node {
 
     public MenuSelection() {
         add(menu1Selection);
+        add(menu2Selection);
 
     }
 

@@ -12,7 +12,7 @@ import java.util.HashMap;
 
 @Component
 @Slf4j
-public class Menu1Selection implements Node {
+public class Menu2Selection implements Node{
 
     @Autowired
     RabbitMqProperties mqProperties;
@@ -20,7 +20,7 @@ public class Menu1Selection implements Node {
     @Autowired
     SendMessageService messageService;
 
-    private String ussdString = "You picked menu 1 please use 1 to exit.";
+    private String ussdString = "You picked menu 2 please use 1 to exit.";
     @Override
     public void render(String msisdn) {
         var ussdMessageRequests = new OutboundUSSDRequest();
@@ -35,27 +35,24 @@ public class Menu1Selection implements Node {
         HashMap<String , String > map = new HashMap<>();
         map.put("transactionId" , String.valueOf(System.currentTimeMillis()));
         messageService.sendMessage(ussdMessageRequests , map, queue);
-
     }
 
     @Override
     public void processInput(String input, String fromMsisdn) {
         int parseInt = Integer.parseInt(input);
-       if (parseInt == 1){
-          var ussdMessageRequests = new OutboundUSSDRequest();
-          ussdMessageRequests.setCallbackUrl("http://localhost:8080/go");
-          ussdMessageRequests.setMsisdn(fromMsisdn);
-          ussdMessageRequests.setSessionId("333o30303hrriro20900");
-          ussdMessageRequests.setServiceCode("*298*778#");
-          ussdMessageRequests.setUssdString("Thanks for choosing with MTN.");
-          ussdMessageRequests.setMessageType(2);
-          Queue queue = mqProperties.getSendQueues().get(0);
-          log.info("Sending message to queue {} with request {}", queue.getName() , ussdMessageRequests);
-          HashMap<String , String > map = new HashMap<>();
-          map.put("transactionId" , String.valueOf(System.currentTimeMillis()));
-          messageService.sendMessage(ussdMessageRequests , map, queue);
-      }
-
-
+        if (parseInt == 1){
+            var ussdMessageRequests = new OutboundUSSDRequest();
+            ussdMessageRequests.setCallbackUrl("http://localhost:8080/go");
+            ussdMessageRequests.setMsisdn(fromMsisdn);
+            ussdMessageRequests.setSessionId("333o30303hrriro20900");
+            ussdMessageRequests.setServiceCode("*298*778#");
+            ussdMessageRequests.setUssdString("Thanks for choosing with MTN.");
+            ussdMessageRequests.setMessageType(2);
+            Queue queue = mqProperties.getSendQueues().get(0);
+            log.info("Sending message to queue {} with request {}", queue.getName() , ussdMessageRequests);
+            HashMap<String , String > map = new HashMap<>();
+            map.put("transactionId" , String.valueOf(System.currentTimeMillis()));
+            messageService.sendMessage(ussdMessageRequests , map, queue);
+        }
     }
 }

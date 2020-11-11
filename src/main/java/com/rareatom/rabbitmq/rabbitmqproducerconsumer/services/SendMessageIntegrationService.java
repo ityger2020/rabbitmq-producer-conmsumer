@@ -20,9 +20,6 @@ public class SendMessageIntegrationService {
             "Please use 2 to exit.";
 
 
-
-
-
     public void processMessages(OutboundUSSDResponse response){
         if (response.getData().getResult().equals("1")){
 
