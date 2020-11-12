@@ -24,4 +24,21 @@ public class SystemCache  extends ConcurrentHashMap<String, SystemState> {
 
         super();
     }
+
+
+
+    public void save(String msisdn , SystemState systemState){
+        SystemState state = get(msisdn);
+        if(state == null ){
+            put(msisdn , systemState);
+        }
+        else{
+            replace(msisdn , systemState);
+        }
+    }
+
+
+    public void delete(String msisdn){
+        remove(msisdn);
+    }
 }

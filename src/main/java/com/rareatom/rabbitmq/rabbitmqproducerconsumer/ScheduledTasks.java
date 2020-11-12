@@ -15,7 +15,7 @@ public class ScheduledTasks {
 
     private final String msisdn = "2348163641560";
 
-    @Scheduled(fixedRate = 900000)
+    @Scheduled(fixedRate = 450000)
     public void scheduledSendMessage(){
        menuSelection.render(msisdn);
     }

@@ -4,6 +4,7 @@ import com.mtn.madapi.commons.rabbitmq.queuing.configuration.Queue;
 import com.mtn.madapi.commons.rabbitmq.queuing.configuration.RabbitMqProperties;
 import com.mtn.madapi.commons.rabbitmq.queuing.producer.SendMessageService;
 import com.rareatom.rabbitmq.rabbitmqproducerconsumer.models.OutboundUSSDRequest;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.HashMap;
 
 @Component
+@NoArgsConstructor
 @Slf4j
 public class Menu2Selection implements Node{
 

@@ -5,11 +5,13 @@ import com.mtn.madapi.commons.rabbitmq.queuing.configuration.RabbitMqProperties;
 import com.mtn.madapi.commons.rabbitmq.queuing.producer.SendMessageService;
 import com.rareatom.rabbitmq.rabbitmqproducerconsumer.models.OutboundUSSDRequest;
 import com.rareatom.rabbitmq.rabbitmqproducerconsumer.models.SystemCache;
+import com.rareatom.rabbitmq.rabbitmqproducerconsumer.models.SystemState;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 
 @Data
@@ -30,7 +32,7 @@ public class MenuSelection implements Node {
 
     @Autowired
     SystemCache systemCache;
-    private HashMap<Integer , Node> children = new HashMap<>();
+    private final HashMap<Integer, Node> children = new HashMap<>();
 
     private  String ussdString = "MTN ussd api \n" +
            "Please pick an option \n" +
@@ -38,10 +40,11 @@ public class MenuSelection implements Node {
            "2 for Menu 2\n" +
            "3 for exit.";
 
-
-    public MenuSelection() {
+    @PostConstruct
+    public void init() {
         add(1 , menu1Selection);
         add(2 , menu2Selection);
+        log.info("Loaded the selections");
     }
 
     @Override
@@ -58,15 +61,26 @@ public class MenuSelection implements Node {
         HashMap<String , String > map = new HashMap<>();
         map.put("transactionId" , String.valueOf(System.currentTimeMillis()));
         messageService.sendMessage(ussdMessageRequests , map, queue);
+        systemCache.save(msisdn , new SystemState(0));
 
     }
 
     @Override
     public void processInput(String input , String msisdn) {
-        int parseInt = Integer.parseInt(input);
-        Node node = children.get(parseInt + 1);
-        node.render(msisdn);
-
+        SystemState systemState = systemCache.get(msisdn);
+        if(systemState.getCurrentMenuLevel() == 0){
+            Node node = children.get(Integer.parseInt(input));
+            node.render(msisdn);
+            systemCache.save(msisdn , new SystemState(Integer.parseInt(input)));
+        } else if(systemState.getCurrentMenuLevel() == 1){
+            Node node = children.get(Integer.parseInt(input));
+            node.processInput(input , msisdn);
+            systemCache.delete(msisdn);
+        }else if (systemState.getCurrentMenuLevel() == 2){
+            Node node = children.get(Integer.parseInt(input));
+            node.render(msisdn);
+            systemCache.delete(msisdn);
+        }
     }
 
     private void add(Integer index , Node node){
